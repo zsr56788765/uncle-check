@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>叔叔是你老公检测器</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 50%, #fbc2eb 100%);
+    padding: 20px;
+  }
+
+  .card {
+    background: rgba(255, 255, 255, 0.92);
+    border-radius: 24px;
+    padding: 48px 40px;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 20px 60px rgba(255, 105, 140, 0.35);
+    text-align: center;
+    animation: pop 0.5s ease;
+  }
+
+  @keyframes pop {
+    from { transform: scale(0.9); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
+  }
+
+  h1 {
+    font-size: 24px;
+    color: #e8447a;
+    margin-bottom: 8px;
+  }
+
+  .tip {
+    color: #999;
+    font-size: 14px;
+    margin-bottom: 28px;
+  }
+
+  input {
+    width: 100%;
+    padding: 14px 18px;
+    border: 2px solid #ffd3e0;
+    border-radius: 14px;
+    font-size: 16px;
+    outline: none;
+    text-align: center;
+    transition: border-color 0.2s;
+  }
+
+  input:focus { border-color: #e8447a; }
+
+  button {
+    margin-top: 16px;
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #ff6b9d, #e8447a);
+    color: #fff;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+
+  button:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(232, 68, 122, 0.4); }
+  button:active { transform: scale(0.98); }
+
+  .result {
+    margin-top: 24px;
+    padding: 18px;
+    border-radius: 14px;
+    background: #fff0f5;
+    color: #e8447a;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 1.6;
+    animation: pop 0.35s ease;
+  }
+
+  .result.special {
+    background: linear-gradient(135deg, #fff8dc, #ffefd5);
+    color: #d4880f;
+  }
+
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>💘 叔叔是你老公检测器</h1>
+  <p class="tip">输入一个名字，马上告诉你结果</p>
+  <input id="nameInput" placeholder="请输入姓名" autofocus>
+  <button onclick="check()">开始检测</button>
+  <div id="result" class="result hidden"></div>
+</div>
+
+<script>
+  const RESULT = '叔叔是你老公';
+
+  function check() {
+    const name = document.getElementById('nameInput').value.trim();
+    const result = document.getElementById('result');
+
+    // 未输入名字时不显示任何内容
+    if (!name) {
+      result.classList.add('hidden');
+      return;
+    }
+
+    result.classList.remove('hidden', 'special');
+
+    if (name === '张书瑞') {
+      // 本尊例外：显示专属结果
+      result.classList.add('special');
+      result.textContent = '👑 张书瑞是独一无二的本尊，此规则对其无效！';
+    } else {
+      result.textContent = '📢 ' + name + '：' + RESULT + '！';
+    }
+  }
+
+  document.getElementById('nameInput').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') check();
+  });
+</script>
+</body>
+</html>
